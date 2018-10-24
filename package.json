@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "![CF](http://i.imgur.com/7v5ASc8.png) LAB - Express Routing & Middleware =======================================================",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -14,15 +14,23 @@
   "license": "ISC",
   "dependencies": {
     "babel-env": "^2.4.1",
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^8.2.6",
     "babel-register": "^6.26.0",
     "cors": "^2.8.4",
-    "debug": "^3.1.0",
+    "debug": "^3.2.6",
     "dotenv": "^5.0.1",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "jest": "^23.6.0",
-    "morgan": "^1.9.0",
-    "require-dir": "^1.0.0",
+    "morgan": "^1.9.1",
+    "require-dir": "^1.1.0",
     "supertest": "^3.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kevinoh47/lab-08.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Kevinoh47/lab-08/issues"
+  },
+  "homepage": "https://github.com/Kevinoh47/lab-08#readme"
 }
