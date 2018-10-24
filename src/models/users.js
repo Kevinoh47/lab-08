@@ -4,7 +4,6 @@ import storage from '../lib/storage/memory.js';
 // import storage from 'fileStorage';
 // import storage from 'mongostuff';
 
-
 class Users {
   
   static findOne(id) {
@@ -40,29 +39,17 @@ class Users {
     let email = data.email;
     let role = data.role;
 
-    if (typeof firstname !== 'string') {
-      throw 'First name must be a string';
-    }  
-    if (firstname.length < 2 || firstname.length > 30) {
-      throw 'Name must be 2-30 characters long.';
+    if (!validateString(firstname)) {
+      throw 'Invalid first name.';
     }
-
-    if (typeof lastname !== 'string') {
-      throw 'Last name must be a string';
+    if (!validateString(lastname)) {
+      throw 'Invalid last name.';
     }  
-    if (lastname.length < 2 || lastname.length > 40) {
-      throw 'Name must be 2-40 characters long.';
+    if (!validateEmail(email)) {
+      throw 'Invalid email.';
     }
-
-    if (typeof email !== 'string') {
-      throw 'email must be a string';
-    }  
-    if (email.length < 2 || !email.includes('@')) {
-      throw 'Email must be at least 2 characters long and it must contain the @ sign.';
-    }
-
-    if (role !== 'user' && role !=='editor' && role !== 'admin') {
-      throw 'Role must be a user, editor, or admin.';
+    if (!validateRole(role)) {
+      throw 'Invalid role.';
     }
     // case new save
     let validatedUser = {firstname:firstname, lastname:lastname, email:email, role:role};
@@ -72,7 +59,22 @@ class Users {
     }
     return Promise.resolve(validatedUser);
   }
+}
 
+//regex from https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript#46181
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
+function validateString(str) {
+  if (typeof str !== 'string' || str.length < 2 || str.length > 50) return false;
+  return true;
+}
+
+function validateRole(role) {
+  if (role !== 'user' && role !=='editor' && role !== 'admin') return false;
+  return true;
 }
 
 export default Users;
