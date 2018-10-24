@@ -40,13 +40,15 @@ router.post('/api/v1/users', (request,response,next) => {
 });
 
 router.put('/api/v1/users/:id', (request,response,next) => {
-  users.put(request.params.id, request.body)  
+  users.validateUser(request.body)
+    .then( result => users.put(request.params.id, result) )  
     .then( result => sendJSON(result, response) )
     .catch( next );
 });
 
 router.patch('/api/v1/users/:id', (request,response,next) => {
-  users.patch(request.params.id, request.body)
+  users.validateUser(request.body)
+    .then( result => users.patch(request.params.id, result) )
     .then( result => sendJSON(result, response) )
     .catch( next );
 });

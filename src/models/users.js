@@ -34,6 +34,7 @@ class Users {
   }
 
   static validateUser(data) {
+    let _id = data._id;
     let firstname = data.firstname;
     let lastname = data.lastname;
     let email = data.email;
@@ -63,7 +64,13 @@ class Users {
     if (role !== 'user' && role !=='editor' && role !== 'admin') {
       throw 'Role must be a user, editor, or admin.';
     }
-    return Promise.resolve({firstname:firstname, lastname:lastname, email:email, role:role });
+    // case new save
+    let validatedUser = {firstname:firstname, lastname:lastname, email:email, role:role};
+    // case update save
+    if (_id) {
+      validatedUser._id=_id;
+    }
+    return Promise.resolve(validatedUser);
   }
 
 }
