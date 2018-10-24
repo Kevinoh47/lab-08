@@ -6,14 +6,7 @@ import storage from '../lib/storage/memory.js';
 
 
 class Users {
-  constructor (_id, firstname, lastname, email, role) {
-    this._id = _id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
-    this.role = role;
-  }
-
+  
   static findOne(id) {
     let query = { _id:id };
     return this.find(query);
@@ -38,6 +31,39 @@ class Users {
   static patch(id, data) {
     data._id = id;
     return storage.save(data);
+  }
+
+  static validateUser(data) {
+    let firstname = data.firstname;
+    let lastname = data.lastname;
+    let email = data.email;
+    let role = data.role;
+
+    if (typeof firstname !== 'string') {
+      throw 'First name must be a string';
+    }  
+    if (firstname.length < 2 || firstname.length > 30) {
+      throw 'Name must be 2-30 characters long.';
+    }
+
+    if (typeof lastname !== 'string') {
+      throw 'Last name must be a string';
+    }  
+    if (lastname.length < 2 || lastname.length > 40) {
+      throw 'Name must be 2-40 characters long.';
+    }
+
+    if (typeof email !== 'string') {
+      throw 'email must be a string';
+    }  
+    if (email.length < 2 || !email.includes('@')) {
+      throw 'Email must be at least 2 characters long and it must contain the @ sign.';
+    }
+
+    if (role !== 'user' && role !=='editor' && role !== 'admin') {
+      throw 'Role must be a user, editor, or admin.';
+    }
+    return Promise.resolve({firstname:firstname, lastname:lastname, email:email, role:role });
   }
 
 }

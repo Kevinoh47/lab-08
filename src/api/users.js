@@ -33,7 +33,8 @@ router.get('/api/v1/users/:id', (request,response,next) => {
 });
 
 router.post('/api/v1/users', (request,response,next) => {
-  users.save(request.body)
+  users.validateUser(request.body)
+    .then( result => users.save(result))
     .then( result => sendJSON(result, response) )
     .catch( next );
 });

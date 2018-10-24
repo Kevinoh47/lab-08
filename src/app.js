@@ -15,7 +15,7 @@ import usersRouter from './api/users.js';
 const app = express();
 
 // App Level MW
-app.use(cors());
+app.use(cors()); // this allows public access 
 app.use(morgan('dev'));
 
 app.use(express.json());
