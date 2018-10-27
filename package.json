@@ -8,7 +8,7 @@
     "watch": "nodemon index.js",
     "test-watch": "jest --watchAll",
     "test": "jest",
-    "lint": "npm run babel-eslint"
+    "lint": "eslint --'**/*.js'"
   },
   "keywords": [],
   "author": "",
