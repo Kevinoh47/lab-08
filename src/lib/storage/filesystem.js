@@ -7,7 +7,8 @@ import uuid from 'uuid/v1';
 const writeFile = util.promisify(fs.writeFile);
 
 // this works locally
-const databaseFile = `${__dirname}/../../../data/db.json`;
+const databaseFile = `${__dirname}/../../../../data/db.json`;
+//const databaseFile = `${__dirname}/../../../data/db.json`;
 //const databaseFile = `${__dirname}/data/db.json`;
 
 let database = require(databaseFile);
