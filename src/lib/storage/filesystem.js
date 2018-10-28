@@ -43,7 +43,7 @@ storage.delete = id => {
   });
 };
 
-storage.save = data => {
+storage.save = (data) => {
   return new Promise( (resolve, reject) => {
     data._id = data._id || uuid();
     let record = Object.assign({}, database[data._id], data);
@@ -60,3 +60,5 @@ storage.saveDatabase = () => {
     .then(result => true)
     .catch(error => error);
 };
+
+export default storage;

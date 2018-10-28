@@ -15,3 +15,4 @@ default:
 }
 
 export default dataStorageModule;
+

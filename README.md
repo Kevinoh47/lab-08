@@ -1,5 +1,43 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB - Express Routing & Middleware
 =======================================================
+[![Build Status](https://travis-ci.com/Kevinoh47/lab-08.svg?branch=working08)](https://travis-ci.com/Kevinoh47/lab-08)
+
+
+## Work
+notes.js module exports the following methods:
+router.get('/api/v1/notes'...
+router.get(('/api/v1/notes/:id'....
+router.post('/api/v1/notes'...
+router.put('/api/v1/notes/:id...
+router.patch('/api/v1/notes/:id'...
+router.delete('/api/v1/notes/:id...
+
+
+users.js module exports the following methods:
+router.get('/api/v1/users'...
+router.get('/api/v1/users/:id'...
+router.post('/api/v1/users'...
+router.put('/api/v1/users/:id'...
+router.patch('/api/v1/users/:id'...
+router.delete('/api/v1/users/:id'...
+
+Code passes tests and passes CI on Travis (minus the linting; see below for details).
+
+Code is deployed on heruku at: https://codefellows-401-lab08.herokuapp.com/
+
+However it just returns an error.
+
+Also, despite lots of help from Cara and Ashley, locally it doesn't write to the db.json file. Using httpie i can read from the file, but POSTs return a 500 error. 
+
+## Comments
+Getting this to work all the way through travis-ci was very difficult. For a long time, the linter would run locally but not on travis... which we still haven't solved. For now, at John's suggestion, we have removed the linter rule from .travis.yml.
+
+Once we set the linter problem aside, we still had issues to deal with. Local tests were still passing but not on travis. It turned out that 
+.gitignore had lines for both 'db' and 'data' so git was not picking up the data/db.json file.... and therefore of course neither was travis. Ergo, even though tests would run locally, they failed on travis.
+
+Also, there is something off with my vs code intellisense .. it appeared to be finding the path as i typed ../, but it was OFF one... almost as if vscode was interpreting the __dirname global variable off by one position. Cara helped my by texting me a snippet for const databaseFile... and it worked.  
+
+Also Cara noticed that i didn't have a jest.config.js file, which, when added and correctly configured, removed some error reports for non-existent errors.
 
 ## Submission Instructions
 * Follow the core Lab submission instructions. This must be fully tested and deployed at Heroku
@@ -50,4 +88,7 @@ You have been provided a working and partially tested API server. The assignment
 ##  Documentation
 Include your travis badge at the top of your `README.md` file
 In your `README.md`, describe the exported values of each module you have defined. Every function description should include it's airty (expected number of parameters), the expected data for each parameter (data-type and limitations), and it's behavior (for both valid and invalid use). Feel free to add any additional information in your `README.md` that you would like.
+
+
+
 
