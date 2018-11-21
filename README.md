@@ -1,7 +1,11 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB - Express Routing & Middleware
 =======================================================
+## Travis CI
 [![Build Status](https://travis-ci.com/Kevinoh47/lab-08.svg?branch=working08)](https://travis-ci.com/Kevinoh47/lab-08)
 
+
+## Heroku
+https://codefellows-401-lab08.herokuapp.com/
 
 ## Work
 notes.js module exports the following methods:
