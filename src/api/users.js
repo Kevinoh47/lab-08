@@ -2,7 +2,7 @@
 
 import express from 'express';
 
-import notes from '../models/notes.js';
+import users from '../models/users.js';
 
 const router = express.Router();
 
@@ -14,8 +14,8 @@ let sendJSON = (data,response) => {
   response.end();
 };
 
-router.get('/api/v1/notes', (request,response,next) => {
-  notes.find()
+router.get('/api/v1/users', (request,response,next) => {
+  users.find()
     .then( data => {
       const output = {
         count: data.length,
@@ -26,32 +26,35 @@ router.get('/api/v1/notes', (request,response,next) => {
     .catch( next );
 });
 
-router.get('/api/v1/notes/:id', (request,response,next) => {
-  notes.find({_id:request.params.id})
+router.get('/api/v1/users/:id', (request,response,next) => {
+  users.find({_id:request.params.id})
     .then( result => sendJSON(result, response) )
     .catch( next );
 });
 
-router.post('/api/v1/notes', (request,response,next) => {
-  notes.save(request.body)
+router.post('/api/v1/users', (request,response,next) => {
+  users.validateUser(request.body)
+    .then( result => users.save(result))
     .then( result => sendJSON(result, response) )
     .catch( next );
 });
 
-router.put('/api/v1/notes/:id', (request,response,next) => {
-  notes.put(request.params.id, request.body)  
+router.put('/api/v1/users/:id', (request,response,next) => {
+  users.validateUser(request.body)
+    .then( result => users.put(request.params.id, result) )  
     .then( result => sendJSON(result, response) )
     .catch( next );
 });
 
-router.patch('/api/v1/notes/:id', (request,response,next) => {
-  notes.patch(request.params.id, request.body)
+router.patch('/api/v1/users/:id', (request,response,next) => {
+  users.validateUser(request.body)
+    .then( result => users.patch(request.params.id, result) )
     .then( result => sendJSON(result, response) )
     .catch( next );
 });
 
-router.delete('/api/v1/notes/:id', (request,response,next) => {
-  notes.delete(request.params.id)
+router.delete('/api/v1/users/:id', (request,response,next) => {
+  users.delete(request.params.id)
     .then( result => sendJSON(result, response) )
     .catch( next );
 });

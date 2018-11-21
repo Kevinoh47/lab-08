@@ -19,7 +19,6 @@ storage.find = query => {
       });
       resolve(results);
     }
-
   });
 };
 
